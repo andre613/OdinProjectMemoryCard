@@ -6,7 +6,7 @@ export enum Difficulty {
 }
 
 interface GameSettings {
-  difficulty: Difficulty,
+  difficulty: Difficulty | null,
 }
 
 export default GameSettings;

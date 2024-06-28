@@ -55,6 +55,7 @@ const GameInitializer: React.FC<GameInitializerProps> = ({setGameSettings}) => {
                 Object.keys(Difficulty).filter((v) => isNaN(Number(v))).map((key) => 
                   <Form.Check 
                     inline 
+                    key={key}
                     value={key} 
                     label={key} 
                     name="difficultyGroup" 
