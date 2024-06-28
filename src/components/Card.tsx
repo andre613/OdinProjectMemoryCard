@@ -1,4 +1,4 @@
-import { Col } from 'react-bootstrap';
+import { Col, Image } from 'react-bootstrap';
 
 export interface CardProps {
   imageId: number;
@@ -9,7 +9,7 @@ const Card: React.FC<CardProps>  = ({imageUrl})  => {
 
   return(
     <Col>
-      {imageUrl}
+      <Image src={imageUrl} height={200} width={150} rounded/>
     </Col>
   );
 };
