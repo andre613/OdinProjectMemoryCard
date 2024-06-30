@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Modal, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Button, Col, Container, Modal, OverlayTrigger, Row, Tooltip } from 'react-bootstrap';
 import { MdHelp } from 'react-icons/md';
 import { BsGithub } from 'react-icons/bs';
 
@@ -55,11 +55,20 @@ const HelpWidget: React.FC<HelpWidgetProps> = ({isNewGame, setIsInitializing}) =
         </Modal.Body>
 
         <Modal.Footer>
-          <OverlayTrigger placement="left" overlay={<Tooltip id="githubRepoButtonTooltip">GitHub Repo</Tooltip>}>
-            <Button variant="info" href="https://github.com/andre613/OdinProjectMemoryCard"><BsGithub /></Button>
-          </OverlayTrigger>
+          <Container>
+            <Row>
+              <Col>
+                <a href="https://www.pexels.com">Photos provided by Pexels</a>
+              </Col>
+              <Col style={{textAlign: 'right'}}>
+                <OverlayTrigger placement="left" overlay={<Tooltip id="githubRepoButtonTooltip">GitHub Repo</Tooltip>}>
+                  <Button variant="info" href="https://github.com/andre613/OdinProjectMemoryCard"><BsGithub /></Button>
+                </OverlayTrigger>&nbsp;
 
-          <Button variant="primary" onClick={handleClose}>{isNewGame? 'Start new game' : 'Close'}</Button>
+                <Button variant="primary" onClick={handleClose}>{isNewGame? 'Start new game' : 'Close'}</Button>
+              </Col>
+            </Row>
+          </Container>
         </Modal.Footer>
       </Modal>
     </>

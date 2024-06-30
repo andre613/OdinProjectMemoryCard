@@ -62,6 +62,10 @@ const App: React.FC = () => {
     }
   };
 
+  const handleStartNewGameButtonClick = (): void => {
+    setIsGameInitializing(true);
+  }
+
   const getPhotos = useCallback((numPhotos: number) => {
     const pexelsClient = createClient(import.meta.env.VITE_PEXELS_API_KEY);
 
@@ -92,18 +96,20 @@ const App: React.FC = () => {
 
             <HelpWidget isNewGame={difficulty === null} setIsInitializing={setIsGameInitializing} />
 
-            <HighScoreBoard
-              isGameOver={isGameOver}
-              latestGameScore={score}
-              setIsGameInitializing={setIsGameInitializing}
-            />
+            {isGameOver &&
+              <HighScoreBoard
+                isGameOver={isGameOver}
+                latestGameScore={score}
+                onStartNewGameButtonClick={handleStartNewGameButtonClick}
+              />
+            }
           </Col>
 
 
         </Row>
         
         <Container fluid style={{paddingTop: '1em'}}>
-          { difficulty !== null && photos?.length > 0 &&
+          { difficulty !== null && photos?.length > 0 && !isGameOver &&
             <Board numRows={numRows} numColumns={4} photos={photos} onCardClick={handleCardClick} currentScore={score}/>
           }
         </Container>
