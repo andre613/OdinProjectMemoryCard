@@ -1,8 +1,14 @@
 import { useState } from 'react';
 import { Button, Modal, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { MdHelp } from 'react-icons/md';
+import { BsGithub } from 'react-icons/bs';
 
-const HelpWidget: React.FC = () => {
+interface HelpWidgetProps {
+  isNewGame: boolean;
+  setIsInitializing: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const HelpWidget: React.FC<HelpWidgetProps> = ({isNewGame, setIsInitializing}) => {
   const [isVisible, setIsVisible] = useState<boolean>(true);
 
   const handleOpen: () => void = () => {
@@ -10,6 +16,10 @@ const HelpWidget: React.FC = () => {
   };
 
   const handleClose: () => void = () => {
+    if(isNewGame){
+      setIsInitializing(true);
+    }
+
     setIsVisible(false);
   };
 
@@ -45,7 +55,11 @@ const HelpWidget: React.FC = () => {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="primary" onClick={handleClose}>Close</Button>
+          <OverlayTrigger placement="left" overlay={<Tooltip id="githubRepoButtonTooltip">GitHub Repo</Tooltip>}>
+            <Button variant="info" href="https://github.com/andre613/OdinProjectMemoryCard"><BsGithub /></Button>
+          </OverlayTrigger>
+
+          <Button variant="primary" onClick={handleClose}>{isNewGame? 'Start new game' : 'Close'}</Button>
         </Modal.Footer>
       </Modal>
     </>

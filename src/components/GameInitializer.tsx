@@ -1,4 +1,3 @@
-import React, {Dispatch, SetStateAction} from 'react';
 import { useState } from 'react';
 import { Button, Form, Modal, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { MdRestartAlt } from "react-icons/md";
@@ -6,12 +5,13 @@ import GameSettings, { Difficulty } from '../models/GameSettings';
 
 interface GameInitializerProps {
   gameSettings: GameSettings;
-  setGameSettings: Dispatch<SetStateAction<GameSettings>>;
+  onInit: (gameSettings: GameSettings) => void;
+  isInitializing: boolean;
+  setIsInitializing: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const GameInitializer: React.FC<GameInitializerProps> = ({gameSettings, setGameSettings}) => {
+const GameInitializer: React.FC<GameInitializerProps> = ({gameSettings, onInit, isInitializing, setIsInitializing}) => {
 
-  const [isInitializing, setIsInitializing] = useState<boolean>(false);
   const [newDifficulty, setNewDifficulty] = useState<Difficulty | null>(gameSettings.difficulty ?? Difficulty.Normal);
 
   const handleClose = (): void => {
@@ -27,7 +27,7 @@ const GameInitializer: React.FC<GameInitializerProps> = ({gameSettings, setGameS
   }
 
   const handleStartNewGame = (): void => {
-    setGameSettings({difficulty: newDifficulty});
+    onInit({difficulty: newDifficulty});
     setIsInitializing(false);
   };
 
